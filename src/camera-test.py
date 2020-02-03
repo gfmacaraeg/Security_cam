@@ -4,6 +4,8 @@ import face_recognition as fr
 import numpy as np
 from time import sleep
 from PIL import Image
+import asyncio as asy
+import alert_owner as ao
 
 
 def change_resolution(cap, res):
@@ -37,6 +39,7 @@ def get_video_feed(res = 1080):
     face_names = []
     face_locations = []
     cap = cv2.VideoCapture('../feed/vid01.mp4')
+    
     # cap = cv2.VideoCapture('../feed/02.JPG')
     process_this_frame = True
     #for changing feed to live cam
@@ -50,8 +53,9 @@ def get_video_feed(res = 1080):
     last_faces = []
     while cap.isOpened():
         #Capturing frame by frame
-        
+        # cap.resizeWindow()
         ret, frame = cap.read()
+        
         # gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         # print(frame)
         #resize
@@ -70,8 +74,9 @@ def get_video_feed(res = 1080):
             # if False in fr.compare_faces(face_encodings, last_faces):
             last_faces = face_encodings[:]
             for face_encoding in face_encodings:
-                # See if the face is a match for the known face(s)
+                #check if face matches the last face:
 
+                # See if the face is a match for the known face(s)
                 matches = fr.compare_faces(known_face_encodings, face_encoding)
                 name = "Unknown"
                 
@@ -116,15 +121,19 @@ def get_video_feed(res = 1080):
 
         #displays the frame
         if ret == True:
-            frame = rescale_frame(frame, 30)
+            frame = rescale_frame(frame, 50)
 
             cv2.imshow('Video',frame)
             # frame2 = rescale_frame(frame, 150)
 
 
-            if cv2.waitKey(25) == ord('q'):
+            if cv2.waitKey(25) & 0xFF == ord('q'):
                 break
         else: break
+    if "unknown" in face_name:
+        ao.sendMail()
+    cap.release()
+    cv2.destroyAllWindows()
 
     
 
@@ -149,5 +158,3 @@ def get_known_faces():
 
 
 get_video_feed()
-# cap.release()
-# cv2.destroyAllWindows()
