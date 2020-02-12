@@ -1,5 +1,9 @@
 # Security_cam
 
-![](https://github.com/gfmacaraeg/Security_cam/blob/master/Animated%20GIF-source.gif)
+Main file is under src folder -> camera-test.py
 
-![Alt Text](https://media.giphy.com/media/Ib0zmkv8X9fBZa7XhV/giphy.gif)
+Security camera application that detects human faces and compares them to a list of known faces which triggers an email alert to the registered owners when an unknown face is detected. 
+
+
+![Alt Text](https://github.com/gfmacaraeg/Security_cam/blob/master/footage_gif.gif)
+
