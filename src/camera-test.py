@@ -132,8 +132,6 @@ def get_video_feed(res = 1080):
     cap.release()
     cv2.destroyAllWindows()
 
-    
-
 def get_known_faces():
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     image_dir = os.path.join(BASE_DIR, "../faces")

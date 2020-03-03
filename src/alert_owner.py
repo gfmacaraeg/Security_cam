@@ -1,5 +1,5 @@
 
-
+#Sends an imail to a specified email address/ owners
 
 import smtplib
 
