@@ -17,11 +17,9 @@ def change_resolution(cap, res):
         cap.set(3,1280)
         cap.set(4, 720)
     elif res == 480:
-        # print("here")
         cap.set(3, 640)
         cap.set(4, 480)
     elif res == 140:
-        # print("here")
         cap.set(3, 350)
         cap.set(4, 140)
     return cap
@@ -57,7 +55,6 @@ def get_video_feed(res = 1080):
         ret, frame = cap.read()
         
         # gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        # print(frame)
         #resize
         small_frame = cv2.resize(frame, (0, 0), fx=0.25, fy=0.25)
         #convert from bgr to rbg
